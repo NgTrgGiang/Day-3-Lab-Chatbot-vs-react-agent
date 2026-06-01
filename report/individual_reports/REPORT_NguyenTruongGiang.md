@@ -61,3 +61,5 @@ Tôi phụ trách **Agent Core** — trái tim của hệ thống, là vòng l�
 - **Scalability**: Thay parser regex bằng **native tool-calling** (function calling JSON schema) để loại bỏ hẳn lớp lỗi PARSER_ERROR.
 - **Safety**: Thêm bộ kiểm tra "Observation phải do hệ thống tạo" — chặn mọi dòng Observation do model tự viết.
 - **Performance**: Cache kết quả tool trong một câu hỏi để tránh gọi lại `lookup_product_price` nhiều lần.
+- **RAG Integration**: Thay thế tool `lookup_product_price` cứng bằng một RAG pipeline — agent vector-search trên catalogue sản phẩm thật, cho phép mở rộng lên hàng nghìn SKU mà không cần hard-code. Retriever trả về top-k chunk; agent tự tổng hợp giá và mô tả từ context đó.
+- **Multi-Agent Architecture**: Tách hệ thống thành các agent chuyên biệt (PricingAgent, CouponAgent, ShippingAgent) được điều phối bởi một OrchestratorAgent. Mỗi sub-agent có tool riêng và có thể chạy song song, giảm latency cho đơn hàng phức tạp nhiều bước.
